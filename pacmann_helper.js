@@ -18,11 +18,11 @@ loginButton.addEventListener("click", function () {
         console.log("Girilen Username:", `"${username}"`);
         console.log("Girilen Password:", `"${password}"`);
 
-        // Kullanıcı adı ve şifreyi kontrol et
+        // Check username and password
         if (username === "admin" && password === "admin") {
-            window.location.href = "table.html"; // Başarılı giriş sonrası yönlendirme
+            window.location.href = "table.html"; // Directing after right inputs
         } else {
-            alert("Hatalı kullanıcı adı veya şifre!");
+            alert("Wrong username or password!");
         }
     } else {
         console.warn("Enter username and password!");
