@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Table</title>
+    <link rel="stylesheet" href="pacman_helper.css">
+    <style>
+        /* Input alanlarının yazı rengini siyah yap */
+        input {
+            color: black !important; /* !important ile stilin önceliğini artır */
+        }
+
+        /* Buton yazı rengini siyah yap */
+        button {
+            color: black !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: white;">Class Information</h2>
+        
+        <!-- Sınıf Bilgi Formu -->
+        <form id="classForm">
+            <input type="text" id="className" placeholder="Class Name" required style="color: white;">
+            <input type="number" id="classSize" placeholder="Number of People" required style="color: white;">
+            <input type="text" id="classDesc" placeholder="Description" required style="color: white;">
+            <button type="submit" style="color: black; background-color: yellow;">Add Class</button> <!-- Buton metni siyah -->
+        </form>
+
+        <!-- Dinamik Tablo -->
+        <table border="1" style="color: white; background-color: black;" id="classTable">
+            <thead>
+                <tr>
+                    <th style="color: white;">Class Name</th>
+                    <th style="color: white;">Number of People</th>
+                    <th style="color: white;">Description</th>
+                </tr>
+            </thead>
+            <tbody id="classTableBody">
+                <!-- Girilen veriler buraya eklenecek -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Kullanıcı sınıf bilgilerini dinamik olarak tabloya ekleyecek fonksiyon
+        document.getElementById("classForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Sayfa yenilenmesini önle
+
+            const className = document.getElementById("className").value.trim();
+            const classSize = document.getElementById("classSize").value.trim();
+            const classDesc = document.getElementById("classDesc").value.trim();
+
+            if (className && classSize && classDesc) {
+                const tableBody = document.getElementById("classTableBody");
+
+                // Yeni satır oluştur
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td style="color: white;">${className}</td>
+                    <td style="color: white;">${classSize}</td>
+                    <td style="color: white;">${classDesc}</td>
+                `;
+
+                // Tabloya ekle
+                tableBody.appendChild(newRow);
+
+                // Formu temizle
+                document.getElementById("classForm").reset();
+            } else {
+                alert("Tüm alanları doldurun!");
+            }
+        });
+
+        // Fare üzerine gelme olayını ekleyelim (Mouseover Event)
+        const rows = document.querySelectorAll("#classTableBody tr");
+        rows.forEach(row => {
+            row.addEventListener("mouseover", function() {
+                row.style.backgroundColor = "lightblue"; // Fare üzerine gelince arka plan rengini değiştir
+            });
+            row.addEventListener("mouseout", function() {
+                row.style.backgroundColor = ""; // Fare satırdan çıktığında arka plan rengini eski haline getir
+            });
+        });
+
+        // Input Focus Event - Form alanına odaklanınca stil değiştir
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach(input => {
+            input.addEventListener("focus", function() {
+                input.style.border = "2px solid yellow"; // Odaklanıldığında kenarlığı sarıya çevir
+            });
+            input.addEventListener("blur", function() {
+                input.style.border = ""; // Odak kaybolduğunda kenarlığı eski haline getir
+            });
+        });
+
+        // Double-click Event - Satıra çift tıklanınca satırı sil veya başka bir işlem yap
+        document.getElementById("classTableBody").addEventListener("dblclick", function(event) {
+            if (event.target.tagName === "TD") { // Eğer tıklanan hücre bir tablo hücresiyse
+                const row = event.target.parentElement; // Satırı al
+                row.remove(); // Satırı kaldır
+                console.log("Row removed"); // Konsola satırın kaldırıldığına dair mesaj yazdır
+            }  
+        });
+
+        // Keydown Event - Klavye tuşuna basıldığında input değeri değiştir
+        inputs.forEach(input => {
+            input.addEventListener("keydown", function() {
+                console.log(`Key pressed in ${input.id}: ${input.value}`);
+            });
+        });
+    </script>
+</body>
+</html>

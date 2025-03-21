@@ -4,7 +4,6 @@ const userLogins = [];
 // Select login button
 const loginButton = document.querySelector("button");
 
-// Login butonuna tıklanınca çalışacak fonksiyon
 loginButton.addEventListener("click", function () {
     // User name and password field
     const usernameInput = document.querySelector("input[type='text']");
@@ -16,15 +15,15 @@ loginButton.addEventListener("click", function () {
 
     // If username and password are not empty save them
     if (username && password) {
-        userLogins.push({ username, password });
+        console.log("Girilen Username:", `"${username}"`);
+        console.log("Girilen Password:", `"${password}"`);
 
-        // Write user inputs to console
-        console.log("All user inputs:");
-        console.table(userLogins);
-
-        // Clean input areas
-        usernameInput.value = "";
-        passwordInput.value = "";
+        // Kullanıcı adı ve şifreyi kontrol et
+        if (username === "admin" && password === "admin") {
+            window.location.href = "table.html"; // Başarılı giriş sonrası yönlendirme
+        } else {
+            alert("Hatalı kullanıcı adı veya şifre!");
+        }
     } else {
         console.warn("Enter username and password!");
     }
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Toggle form visibility with 'H' key
 document.addEventListener("keydown", function (event) {
-    if (event.key.toLowerCase() === "h") {  // 'H' tuşuna basıldığında
+    if (event.key.toLowerCase() === "h") {  // when 'H' pressed
         const form = document.querySelector(".pacman-login");
         if (form) {
             if (form.style.display === "none") {
