@@ -12,18 +12,17 @@
             <form method="post">
                 <input type="hidden" asp-for="ClassInfo.Id" />
                 <div class="mb-3">
-                    <label for="ClassName" class="form-label">Class Name</label>
+                    <label class="form-label">Class Name</label>
                     <input type="text" asp-for="ClassInfo.ClassName" class="form-control" />
                     <span asp-validation-for="ClassInfo.ClassName" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label for="StudentCount" class="form-label">Student Count</label>
-                    <input type="number" asp-for="ClassInfo.StudentCount" class="form-control" 
-                    value="@(Model.ClassInfo.StudentCount == 0 ? "" : Model.ClassInfo.StudentCount.ToString())" />
+                    <label class="form-label">Student Count</label>
+                    <input type="number" asp-for="ClassInfo.StudentCount" class="form-control" />
                     <span asp-validation-for="ClassInfo.StudentCount" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label for="Description" class="form-label">Description</label>
+                    <label class="form-label">Description</label>
                     <textarea asp-for="ClassInfo.Description" class="form-control"></textarea>
                     <span asp-validation-for="ClassInfo.Description" class="text-danger"></span>
                 </div>
@@ -33,14 +32,18 @@
             </form>
         </div>
 
-
         <!-- Table -->
         <div class="col-md-8">
             <h3>Class List</h3>
+
+            <form method="get" class="mb-3">
+                <input type="text" name="Filter" value="@Model.Filter" placeholder="Filter by Class Name..." class="form-control d-inline w-75" />
+                <button type="submit" class="btn btn-secondary mt-2">Filter</button>
+            </form>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Class Name</th>
                         <th>Student Count</th>
                         <th>Description</th>
@@ -48,10 +51,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in MyRazorApp.Pages.IndexModel.ClassList)
+                    @foreach (var item in Model.ClassInformationTableList)
                     {
                         <tr>
-                            <td>@item.Id</td>
                             <td>@item.ClassName</td>
                             <td>@item.StudentCount</td>
                             <td>@item.Description</td>
@@ -66,6 +68,18 @@
                     }
                 </tbody>
             </table>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                            <a class="page-link" asp-page="./Index" asp-route-pageNumber="@i" asp-route-filter="@Model.Filter">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

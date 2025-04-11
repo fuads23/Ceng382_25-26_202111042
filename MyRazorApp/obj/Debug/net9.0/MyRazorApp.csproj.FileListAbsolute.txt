@@ -95,4 +95,4 @@ C:\Users\Fuad\Desktop\Yeni klasör\Ceng382_25-26_202111042\MyRazorApp\obj\Debug\
 C:\Users\Fuad\Desktop\Yeni klasör\Ceng382_25-26_202111042\MyRazorApp\obj\Debug\net9.0\MyRazorApp.pdb
 C:\Users\Fuad\Desktop\Yeni klasör\Ceng382_25-26_202111042\MyRazorApp\obj\Debug\net9.0\MyRazorApp.genruntimeconfig.cache
 C:\Users\Fuad\Desktop\Yeni klasör\Ceng382_25-26_202111042\MyRazorApp\obj\Debug\net9.0\ref\MyRazorApp.dll
-C:\Users\Fuad\Desktop\Yeni klasör\Ceng382_25-26_202111042\MyRazorApp\obj\Debug\net9.0\compressed\zx871nmwpl-n8fkxqff5a.gz
+C:\Users\Fuad\Desktop\Yeni klasör\Ceng382_25-26_202111042\MyRazorApp\obj\Debug\net9.0\compressed\zx871nmwpl-3bh7rsmxr4.gz
