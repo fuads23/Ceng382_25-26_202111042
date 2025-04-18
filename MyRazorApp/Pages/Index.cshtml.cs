@@ -1,20 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyRazorApp.Models;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using MyRazorApp.Helpers;
+using System.Text.Json;
 
 namespace MyRazorApp.Pages
 {
     public class IndexModel : PageModel
     {
-        public static List<ClassInformationModel> ClassList { get; set; } = new List<ClassInformationModel>();
+        public static List<ClassInformationModel> ClassList { get; set; } = new();
 
         [BindProperty]
-        public ClassInformationModel ClassInfo { get; set; } = new ClassInformationModel();
-
-        public List<ClassInformationTable> ClassInformationTableList { get; set; } = new();
+        public ClassInformationModel ClassInfo { get; set; } = new();
 
         [BindProperty(SupportsGet = true)]
         public string? Filter { get; set; }
@@ -22,69 +19,64 @@ namespace MyRazorApp.Pages
         [BindProperty(SupportsGet = true)]
         public int PageNumber { get; set; } = 1;
 
-        public int PageSize { get; set; } = 10;
+        [BindProperty]
+        public List<string> SelectedColumns { get; set; } = new();
 
-        public int CurrentPage { get; set; }
+        [BindProperty]
+        public string ExportType { get; set; } = "all";
+
+        public List<ClassInformationTable> TableData { get; set; } = new();
+
+        public int PageSize => 10;
         public int TotalPages { get; set; }
 
-        public IActionResult OnGet(int? pageNumber, string? filter)
+        public void OnGet()
         {
-            // --- Sınıf listesi hazırlanıyor ---
             if (!ClassList.Any())
             {
-                for (int i = 1; i <= 100; i++)
+                for (int i = 1; i <= 120; i++)
                 {
                     ClassList.Add(new ClassInformationModel
                     {
                         Id = i,
                         ClassName = $"Class {i}",
-                        StudentCount = i * 5,
-                        Description = $"Description for Class {i}"
+                        StudentCount = 10 + (i % 20),
+                        Description = $"This is description for class {i}"
                     });
                 }
             }
 
-            // --- Filtreleme işlemi ---
-            Filter = filter;
-            var filtered = string.IsNullOrEmpty(filter)
-                ? ClassList
-                : ClassList.Where(c => c.ClassName.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList();
+            var query = ClassList.AsQueryable();
 
-            // --- Sayfalama işlemi ---
-            int pageSize = 10;
-            CurrentPage = pageNumber ?? 1;
-            TotalPages = (int)Math.Ceiling(filtered.Count / (double)pageSize);
+            if (!string.IsNullOrEmpty(Filter))
+                query = query.Where(c => c.ClassName.Contains(Filter, StringComparison.OrdinalIgnoreCase));
 
-            ClassInformationTableList = filtered
-                .Skip((CurrentPage - 1) * pageSize)
-                .Take(pageSize)
-                .Select(c => new ClassInformationTable
-                {
-                    Id = c.Id,
-                    ClassName = c.ClassName,
-                    StudentCount = c.StudentCount,
-                    Description = c.Description
-                }).ToList();
+            TotalPages = (int)Math.Ceiling(query.Count() / (double)PageSize);
 
+            var paged = query.Skip((PageNumber - 1) * PageSize).Take(PageSize);
 
-            return Page();
+            TableData = paged.Select(c => new ClassInformationTable
+            {
+                Id = c.Id,
+                ClassName = c.ClassName,
+                StudentCount = c.StudentCount,
+                Description = c.Description
+            }).ToList();
         }
 
         public IActionResult OnPostAdd()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
             if (ClassInfo.Id > 0)
             {
-                var existingClass = ClassList.FirstOrDefault(c => c.Id == ClassInfo.Id);
-                if (existingClass != null)
+                var existing = ClassList.FirstOrDefault(c => c.Id == ClassInfo.Id);
+                if (existing != null)
                 {
-                    existingClass.ClassName = ClassInfo.ClassName;
-                    existingClass.StudentCount = ClassInfo.StudentCount;
-                    existingClass.Description = ClassInfo.Description;
+                    existing.ClassName = ClassInfo.ClassName;
+                    existing.StudentCount = ClassInfo.StudentCount;
+                    existing.Description = ClassInfo.Description;
                 }
             }
             else
@@ -93,7 +85,7 @@ namespace MyRazorApp.Pages
                 ClassList.Add(ClassInfo);
             }
 
-            return RedirectToPage();
+            return RedirectToPage(new { Filter, PageNumber });
         }
 
         public IActionResult OnPostEdit(int id)
@@ -110,6 +102,7 @@ namespace MyRazorApp.Pages
                 };
             }
 
+            OnGet();
             return Page();
         }
 
@@ -117,26 +110,40 @@ namespace MyRazorApp.Pages
         {
             var item = ClassList.FirstOrDefault(c => c.Id == id);
             if (item != null)
-            {
                 ClassList.Remove(item);
+
+            return RedirectToPage(new { Filter, PageNumber });
+        }
+
+        public IActionResult OnPostExportJson()
+        {
+            // Filtreli ya da tüm veriyi al
+            var query = ClassList.AsQueryable();
+
+            if (ExportType == "filtered" && !string.IsNullOrWhiteSpace(Filter))
+            {
+                query = query.Where(c => c.ClassName.Contains(Filter, StringComparison.OrdinalIgnoreCase));
             }
 
-            return RedirectToPage();
+            // Veriyi tablo modeli ile eşle
+            var data = query
+                .Select(c => new ClassInformationTable
+                {
+                    Id = c.Id,
+                    ClassName = c.ClassName,
+                    StudentCount = c.StudentCount,
+                    Description = c.Description
+                })
+                .ToList();
+
+            var selectedCols = SelectedColumns.Any()
+                ? SelectedColumns
+                : new List<string> { "ClassName", "StudentCount", "Description" };
+
+            var json = Utils.Instance.ExportAsJson(data, selectedCols);
+            var fileName = $"class_export_{DateTime.Now:yyyyMMddHHmmss}.json";
+
+            return File(System.Text.Encoding.UTF8.GetBytes(json), "application/json", fileName);
         }
-    }
-
-    public class ClassInformationModel
-    {
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Class name is required.")]
-        public string ClassName { get; set; } = string.Empty;
-
-        [Required(ErrorMessage = "Student count is required.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Student count must be at least 1.")]
-        public int StudentCount { get; set; }
-
-        [Required(ErrorMessage = "Description is required.")]
-        public string Description { get; set; } = string.Empty;
     }
 }

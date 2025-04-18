@@ -32,16 +32,59 @@
             </form>
         </div>
 
-        <!-- Table -->
+        <!-- Table + Filter + Export -->
         <div class="col-md-8">
             <h3>Class List</h3>
 
             <form method="get" class="mb-3">
-                <input type="text" name="Filter" value="@Model.Filter" placeholder="Filter by Class Name..." class="form-control d-inline w-75" />
-                <button type="submit" class="btn btn-secondary mt-2">Filter</button>
+                <div class="input-group">
+                    <input type="text" name="Filter" value="@Model.Filter" class="form-control"
+                        placeholder="Filter by Class Name..." />
+                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
+                </div>
             </form>
 
-            <table class="table table-striped">
+            <form method="post" asp-page-handler="ExportJson" class="mb-4">
+                <input type="hidden" name="Filter" value="@Model.Filter" />
+                <input type="hidden" name="PageNumber" value="@Model.PageNumber" />
+                
+                <div class="mb-2">
+                    <strong>Export Type:</strong><br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="ExportType" value="all" id="exportAll"
+                            checked />
+                        <label class="form-check-label" for="exportAll">Unfiltered Export</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="ExportType" value="filtered"
+                            id="exportFiltered" />
+                        <label class="form-check-label" for="exportFiltered">Filtered Export</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <strong>Select columns to export:</strong><br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="SelectedColumns" value="ClassName"
+                            id="colClassName" checked />
+                        <label class="form-check-label" for="colClassName">Class Name</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="SelectedColumns" value="StudentCount"
+                            id="colStudentCount" checked />
+                        <label class="form-check-label" for="colStudentCount">Student Count</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="SelectedColumns" value="Description"
+                            id="colDescription" checked />
+                        <label class="form-check-label" for="colDescription">Description</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Export to JSON</button>
+            </form>
+
+            <table class="table table-striped mt-3">
                 <thead>
                     <tr>
                         <th>Class Name</th>
@@ -51,17 +94,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.ClassInformationTableList)
+                    @foreach (var item in Model.TableData)
                     {
                         <tr>
                             <td>@item.ClassName</td>
                             <td>@item.StudentCount</td>
                             <td>@item.Description</td>
                             <td>
-                                <form method="post">
+                                <form method="post" class="d-inline">
                                     <input type="hidden" name="id" value="@item.Id" />
-                                    <button type="submit" asp-page-handler="Edit" class="btn btn-warning btn-sm">Edit</button>
-                                    <button type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm">Delete</button>
+                                    <button type="submit" asp-page-handler="Edit"
+                                        class="btn btn-warning btn-sm">Edit</button>
+                                    <button type="submit" asp-page-handler="Delete"
+                                        class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -70,12 +115,12 @@
             </table>
 
             <!-- Pagination -->
-            <nav aria-label="Page navigation" class="mt-4">
+            <nav>
                 <ul class="pagination justify-content-center">
                     @for (int i = 1; i <= Model.TotalPages; i++)
                     {
-                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                            <a class="page-link" asp-page="./Index" asp-route-pageNumber="@i" asp-route-filter="@Model.Filter">@i</a>
+                        <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                            <a class="page-link" asp-route-PageNumber="@i" asp-route-Filter="@Model.Filter">@i</a>
                         </li>
                     }
                 </ul>

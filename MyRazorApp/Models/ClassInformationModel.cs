@@ -4,16 +4,16 @@ namespace MyRazorApp.Models
 {
     public class ClassInformationModel
     {
-        public int Id { get; set; } // Auto-incremented
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Class name is required.")]
-        public string ClassName { get; set; } = string.Empty; // Varsayılan boş değer
+        public string ClassName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Student count is required.")]
-        [Range(1, 1000, ErrorMessage = "Student count must be between 1 and 1000.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Student count must be at least 1.")]
         public int StudentCount { get; set; }
 
         [Required(ErrorMessage = "Description is required.")]
-        public string Description { get; set; } = string.Empty; // Varsayılan boş değer
+        public string Description { get; set; } = string.Empty;
     }
 }
