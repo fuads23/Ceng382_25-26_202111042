@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyRazorApp.Models;
 using MyRazorApp.Helpers;
-using System.Text.Json;
 
 namespace MyRazorApp.Pages
 {
@@ -19,11 +18,8 @@ namespace MyRazorApp.Pages
         [BindProperty(SupportsGet = true)]
         public int PageNumber { get; set; } = 1;
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public List<string> SelectedColumns { get; set; } = new();
-
-        [BindProperty]
-        public string ExportType { get; set; } = "all";
 
         public List<ClassInformationTable> TableData { get; set; } = new();
 
@@ -32,36 +28,39 @@ namespace MyRazorApp.Pages
 
         public void OnGet()
         {
-            if (!ClassList.Any())
-            {
-                for (int i = 1; i <= 120; i++)
-                {
-                    ClassList.Add(new ClassInformationModel
-                    {
-                        Id = i,
-                        ClassName = $"Class {i}",
-                        StudentCount = 10 + (i % 20),
-                        Description = $"This is description for class {i}"
-                    });
-                }
-            }
+            InitializeClassList();
 
-            var query = ClassList.AsQueryable();
-
-            if (!string.IsNullOrEmpty(Filter))
-                query = query.Where(c => c.ClassName.Contains(Filter, StringComparison.OrdinalIgnoreCase));
+            var query = ApplyFiltering(ClassList.AsQueryable());
 
             TotalPages = (int)Math.Ceiling(query.Count() / (double)PageSize);
 
-            var paged = query.Skip((PageNumber - 1) * PageSize).Take(PageSize);
+            TableData = query
+                .Skip((PageNumber - 1) * PageSize)
+                .Take(PageSize)
+                .Select(c => new ClassInformationTable
+                {
+                    Id = c.Id,
+                    ClassName = c.ClassName,
+                    StudentCount = c.StudentCount,
+                    Description = c.Description
+                }).ToList();
+        }
 
-            TableData = paged.Select(c => new ClassInformationTable
+        public IActionResult OnPostSelectColumn(string column)
+        {
+            var updated = Request.Form["SelectedColumns"].ToList();
+
+            if (updated.Contains(column))
+                updated.Remove(column);
+            else
+                updated.Add(column);
+
+            return RedirectToPage(new
             {
-                Id = c.Id,
-                ClassName = c.ClassName,
-                StudentCount = c.StudentCount,
-                Description = c.Description
-            }).ToList();
+                Filter,
+                PageNumber,
+                SelectedColumns = updated
+            });
         }
 
         public IActionResult OnPostAdd()
@@ -85,7 +84,7 @@ namespace MyRazorApp.Pages
                 ClassList.Add(ClassInfo);
             }
 
-            return RedirectToPage(new { Filter, PageNumber });
+            return RedirectToPage(new { Filter, PageNumber, SelectedColumns });
         }
 
         public IActionResult OnPostEdit(int id)
@@ -112,38 +111,57 @@ namespace MyRazorApp.Pages
             if (item != null)
                 ClassList.Remove(item);
 
-            return RedirectToPage(new { Filter, PageNumber });
+            return RedirectToPage(new { Filter, PageNumber, SelectedColumns });
         }
 
         public IActionResult OnPostExportJson()
         {
-            // Filtreli ya da tüm veriyi al
-            var query = ClassList.AsQueryable();
+            var query = ApplyFiltering(ClassList.AsQueryable());
 
-            if (ExportType == "filtered" && !string.IsNullOrWhiteSpace(Filter))
-            {
-                query = query.Where(c => c.ClassName.Contains(Filter, StringComparison.OrdinalIgnoreCase));
-            }
-
-            // Veriyi tablo modeli ile eşle
-            var data = query
+            // Sadece geçerli sayfayı al
+            var pageData = query
+                .Skip((PageNumber - 1) * PageSize)
+                .Take(PageSize)
                 .Select(c => new ClassInformationTable
                 {
-                    Id = c.Id,
                     ClassName = c.ClassName,
                     StudentCount = c.StudentCount,
                     Description = c.Description
-                })
-                .ToList();
+                }).ToList();
 
-            var selectedCols = SelectedColumns.Any()
+            var columns = SelectedColumns.Any()
                 ? SelectedColumns
                 : new List<string> { "ClassName", "StudentCount", "Description" };
 
-            var json = Utils.Instance.ExportAsJson(data, selectedCols);
+            var json = Utils.Instance.ExportAsJson(pageData, columns);
             var fileName = $"class_export_{DateTime.Now:yyyyMMddHHmmss}.json";
 
             return File(System.Text.Encoding.UTF8.GetBytes(json), "application/json", fileName);
+        }
+
+        private IQueryable<ClassInformationModel> ApplyFiltering(IQueryable<ClassInformationModel> query)
+        {
+            if (!string.IsNullOrEmpty(Filter))
+                query = query.Where(c => c.ClassName.Contains(Filter, StringComparison.OrdinalIgnoreCase));
+
+            return query;
+        }
+
+        private void InitializeClassList()
+        {
+            if (!ClassList.Any())
+            {
+                for (int i = 1; i <= 120; i++)
+                {
+                    ClassList.Add(new ClassInformationModel
+                    {
+                        Id = i,
+                        ClassName = $"Class {i}",
+                        StudentCount = 10 + (i % 20),
+                        Description = $"This is description for class {i}"
+                    });
+                }
+            }
         }
     }
 }

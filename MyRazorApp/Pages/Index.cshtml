@@ -4,6 +4,20 @@
     ViewData["Title"] = "Class Management";
 }
 
+<style>
+    .selected-column {
+        background-color: #0d6efd !important;
+        color: white;
+    }
+
+    .header-button {
+        all: unset;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 4px 6px;
+    }
+</style>
+
 <div class="container mt-5">
     <div class="row">
         <!-- Form -->
@@ -32,64 +46,52 @@
             </form>
         </div>
 
-        <!-- Table + Filter + Export -->
+        <!-- Table -->
         <div class="col-md-8">
             <h3>Class List</h3>
 
-            <form method="get" class="mb-3">
-                <div class="input-group">
-                    <input type="text" name="Filter" value="@Model.Filter" class="form-control"
-                        placeholder="Filter by Class Name..." />
-                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
-                </div>
+            <!-- Filter input -->
+            <form method="get" id="filterForm">
+                <input type="text" name="Filter" value="@Model.Filter"
+                       class="form-control mb-3" placeholder="Search class name..." id="filterInput" />
+                @foreach (var col in Model.SelectedColumns)
+                {
+                    <input type="hidden" name="SelectedColumns" value="@col" />
+                }
             </form>
 
-            <form method="post" asp-page-handler="ExportJson" class="mb-4">
+            <!-- Export Button -->
+            <form method="post" asp-page-handler="ExportJson" class="mb-3">
                 <input type="hidden" name="Filter" value="@Model.Filter" />
                 <input type="hidden" name="PageNumber" value="@Model.PageNumber" />
-                
-                <div class="mb-2">
-                    <strong>Export Type:</strong><br />
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="ExportType" value="all" id="exportAll"
-                            checked />
-                        <label class="form-check-label" for="exportAll">Unfiltered Export</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="ExportType" value="filtered"
-                            id="exportFiltered" />
-                        <label class="form-check-label" for="exportFiltered">Filtered Export</label>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <strong>Select columns to export:</strong><br />
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="SelectedColumns" value="ClassName"
-                            id="colClassName" checked />
-                        <label class="form-check-label" for="colClassName">Class Name</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="SelectedColumns" value="StudentCount"
-                            id="colStudentCount" checked />
-                        <label class="form-check-label" for="colStudentCount">Student Count</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="SelectedColumns" value="Description"
-                            id="colDescription" checked />
-                        <label class="form-check-label" for="colDescription">Description</label>
-                    </div>
-                </div>
-
+                @foreach (var col in Model.SelectedColumns)
+                {
+                    <input type="hidden" name="SelectedColumns" value="@col" />
+                }
                 <button type="submit" class="btn btn-success">Export to JSON</button>
             </form>
 
             <table class="table table-striped mt-3">
                 <thead>
                     <tr>
-                        <th>Class Name</th>
-                        <th>Student Count</th>
-                        <th>Description</th>
+                        @foreach (var col in new[] { "ClassName", "StudentCount", "Description" })
+                        {
+                            <th class="@(Model.SelectedColumns.Contains(col) ? "selected-column" : "")">
+                                <form method="post" asp-page-handler="SelectColumn" style="display:inline">
+                                    @foreach (var selected in Model.SelectedColumns)
+                                    {
+                                        <input type="hidden" name="SelectedColumns" value="@selected" />
+                                    }
+                                    <input type="hidden" name="column" value="@col" />
+                                    <input type="hidden" name="Filter" value="@Model.Filter" />
+                                    <input type="hidden" name="PageNumber" value="@Model.PageNumber" />
+                                    <button type="submit" class="header-button">
+                                        @(col == "ClassName" ? "Class Name" :
+                                          col == "StudentCount" ? "Student Count" : "Description")
+                                    </button>
+                                </form>
+                            </th>
+                        }
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -97,16 +99,14 @@
                     @foreach (var item in Model.TableData)
                     {
                         <tr>
-                            <td>@item.ClassName</td>
-                            <td>@item.StudentCount</td>
-                            <td>@item.Description</td>
+                            <td class="@(Model.SelectedColumns.Contains("ClassName") ? "selected-column" : "")">@item.ClassName</td>
+                            <td class="@(Model.SelectedColumns.Contains("StudentCount") ? "selected-column" : "")">@item.StudentCount</td>
+                            <td class="@(Model.SelectedColumns.Contains("Description") ? "selected-column" : "")">@item.Description</td>
                             <td>
                                 <form method="post" class="d-inline">
                                     <input type="hidden" name="id" value="@item.Id" />
-                                    <button type="submit" asp-page-handler="Edit"
-                                        class="btn btn-warning btn-sm">Edit</button>
-                                    <button type="submit" asp-page-handler="Delete"
-                                        class="btn btn-danger btn-sm">Delete</button>
+                                    <button type="submit" asp-page-handler="Edit" class="btn btn-warning btn-sm">Edit</button>
+                                    <button type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -114,13 +114,21 @@
                 </tbody>
             </table>
 
-            <!-- Pagination -->
+            <!-- Pagination with hidden selectedColumns -->
             <nav>
                 <ul class="pagination justify-content-center">
                     @for (int i = 1; i <= Model.TotalPages; i++)
                     {
                         <li class="page-item @(i == Model.PageNumber ? "active" : "")">
-                            <a class="page-link" asp-route-PageNumber="@i" asp-route-Filter="@Model.Filter">@i</a>
+                            <form method="get" style="display:inline;">
+                                <input type="hidden" name="PageNumber" value="@i" />
+                                <input type="hidden" name="Filter" value="@Model.Filter" />
+                                @foreach (var col in Model.SelectedColumns ?? new List<string>())
+                                {
+                                    <input type="hidden" name="SelectedColumns" value="@col" />
+                                }
+                                <button type="submit" class="page-link">@i</button>
+                            </form>
                         </li>
                     }
                 </ul>
@@ -128,3 +136,16 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        const input = document.getElementById("filterInput");
+        let timer;
+        input.addEventListener("input", function () {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                document.getElementById("filterForm").submit();
+            }, 500);
+        });
+    </script>
+}
