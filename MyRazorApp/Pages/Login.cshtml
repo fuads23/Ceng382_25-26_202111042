@@ -1,0 +1,66 @@
+@page
+@model MyRazorApp.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    body {
+        background-color: #f2f4f8;
+    }
+
+    .login-container {
+        max-width: 400px;
+        margin: 80px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .form-control {
+        border-radius: 6px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        border-radius: 6px;
+    }
+
+    .login-title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #333;
+    }
+</style>
+
+<div class="login-container">
+    <h2 class="login-title">Welcome Back</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Username" class="form-label">Username</label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>

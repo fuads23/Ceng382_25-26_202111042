@@ -26,8 +26,13 @@ namespace MyRazorApp.Pages
         public int PageSize => 10;
         public int TotalPages { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (!IsLoggedIn())
+            {
+                return RedirectToPage("/Login");
+            }
+
             InitializeClassList();
 
             var query = ApplyFiltering(ClassList.AsQueryable());
@@ -44,7 +49,10 @@ namespace MyRazorApp.Pages
                     StudentCount = c.StudentCount,
                     Description = c.Description
                 }).ToList();
+
+            return Page();
         }
+
 
         public IActionResult OnPostSelectColumn(string column)
         {
@@ -163,5 +171,21 @@ namespace MyRazorApp.Pages
                 }
             }
         }
+
+        private bool IsLoggedIn()
+        {
+            var sessionUsername = HttpContext.Session.GetString("username");
+            var sessionToken = HttpContext.Session.GetString("token");
+            var sessionId = HttpContext.Session.GetString("session_id");
+
+            Request.Cookies.TryGetValue("username", out var cookieUsername);
+            Request.Cookies.TryGetValue("token", out var cookieToken);
+            Request.Cookies.TryGetValue("session_id", out var cookieSessionId);
+
+            return sessionUsername == cookieUsername && sessionToken == cookieToken && sessionId == cookieSessionId;
+        }
+
+
+
     }
 }

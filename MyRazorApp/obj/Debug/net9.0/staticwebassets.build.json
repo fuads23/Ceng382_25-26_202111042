@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sXDiDvLljeRFOTXReob8KkvlLdMjg+rO7VdadDa9tD4=",
+  "Hash": "2fe+PWXRqYpc9X0erkXqZLBxF1HgeT9IpYJ7sgjuS9o=",
   "Source": "MyRazorApp",
   "BasePath": "_content/MyRazorApp",
   "Mode": "Default",
@@ -857,6 +857,27 @@
       "OriginalItemSpec": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
+      "Identity": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-vc9hrb77nv.gz",
+      "SourceId": "MyRazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MyRazorApp",
+      "RelativePath": "data/users#[.{fingerprint=vc9hrb77nv}]?.json.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\data\\users.json",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "0whq2z0cql",
+      "Integrity": "EIsjTsVISCU4kPqdMn3VGIme3LNvKgWoaB2FWTgHD2Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\data\\users.json"
+    },
+    {
       "Identity": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\l54cks3koe-0j3bgjxly4.gz",
       "SourceId": "MyRazorApp",
       "SourceType": "Discovered",
@@ -1340,12 +1361,12 @@
       "OriginalItemSpec": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-3bh7rsmxr4.gz",
+      "Identity": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-bqk6p3czup.gz",
       "SourceId": "MyRazorApp",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/MyRazorApp",
-      "RelativePath": "css/site#[.{fingerprint=3bh7rsmxr4}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=bqk6p3czup}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1354,8 +1375,8 @@
       "RelatedAsset": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "jvl7vi4hq2",
-      "Integrity": "gQ6AoQ2Z/ALAAHE27vFaQrl8YqPC1danOVRWOEciyLU=",
+      "Fingerprint": "f7jozmbjut",
+      "Integrity": "xf0cv+5usyXf8V/CFvXrCTJYyIT/xcbgzFNqngmiW4Q=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\css\\site.css"
@@ -1417,11 +1438,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3bh7rsmxr4",
-      "Integrity": "oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY=",
+      "Fingerprint": "bqk6p3czup",
+      "Integrity": "jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\data\\users.json",
+      "SourceId": "MyRazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\",
+      "BasePath": "_content/MyRazorApp",
+      "RelativePath": "data/users#[.{fingerprint}]?.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "vc9hrb77nv",
+      "Integrity": "YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\data\\users.json"
     },
     {
       "Identity": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\favicon.ico",
@@ -2728,13 +2770,13 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.3bh7rsmxr4.css",
-      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-3bh7rsmxr4.gz",
+      "Route": "css/site.bqk6p3czup.css",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-bqk6p3czup.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.002680965147"
+          "Quality": "0.002398081535"
         }
       ],
       "ResponseHeaders": [
@@ -2744,15 +2786,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "372"
+          "Value": "416"
         },
         {
           "Name": "ETag",
-          "Value": "\"gQ6AoQ2Z/ALAAHE27vFaQrl8YqPC1danOVRWOEciyLU=\""
+          "Value": "\"xf0cv+5usyXf8V/CFvXrCTJYyIT/xcbgzFNqngmiW4Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 13:53:01 GMT"
+          "Value": "Fri, 02 May 2025 11:19:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2772,13 +2814,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY=\""
+          "Value": "W/\"jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3bh7rsmxr4"
+          "Value": "bqk6p3czup"
         },
         {
           "Name": "label",
@@ -2786,12 +2828,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY="
+          "Value": "sha256-jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA="
         }
       ]
     },
     {
-      "Route": "css/site.3bh7rsmxr4.css",
+      "Route": "css/site.bqk6p3czup.css",
       "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2801,7 +2843,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "744"
+          "Value": "845"
         },
         {
           "Name": "Content-Type",
@@ -2809,11 +2851,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY=\""
+          "Value": "\"jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 13:53:01 GMT"
+          "Value": "Fri, 02 May 2025 11:19:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2823,7 +2865,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3bh7rsmxr4"
+          "Value": "bqk6p3czup"
         },
         {
           "Name": "label",
@@ -2831,13 +2873,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY="
+          "Value": "sha256-jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA="
         }
       ]
     },
     {
-      "Route": "css/site.3bh7rsmxr4.css.gz",
-      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-3bh7rsmxr4.gz",
+      "Route": "css/site.bqk6p3czup.css.gz",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-bqk6p3czup.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2846,7 +2888,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "372"
+          "Value": "416"
         },
         {
           "Name": "Content-Type",
@@ -2854,11 +2896,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gQ6AoQ2Z/ALAAHE27vFaQrl8YqPC1danOVRWOEciyLU=\""
+          "Value": "\"xf0cv+5usyXf8V/CFvXrCTJYyIT/xcbgzFNqngmiW4Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 13:53:01 GMT"
+          "Value": "Fri, 02 May 2025 11:19:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2876,7 +2918,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3bh7rsmxr4"
+          "Value": "bqk6p3czup"
         },
         {
           "Name": "label",
@@ -2884,18 +2926,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-gQ6AoQ2Z/ALAAHE27vFaQrl8YqPC1danOVRWOEciyLU="
+          "Value": "sha256-xf0cv+5usyXf8V/CFvXrCTJYyIT/xcbgzFNqngmiW4Q="
         }
       ]
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-3bh7rsmxr4.gz",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-bqk6p3czup.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.002680965147"
+          "Quality": "0.002398081535"
         }
       ],
       "ResponseHeaders": [
@@ -2905,15 +2947,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "372"
+          "Value": "416"
         },
         {
           "Name": "ETag",
-          "Value": "\"gQ6AoQ2Z/ALAAHE27vFaQrl8YqPC1danOVRWOEciyLU=\""
+          "Value": "\"xf0cv+5usyXf8V/CFvXrCTJYyIT/xcbgzFNqngmiW4Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 13:53:01 GMT"
+          "Value": "Fri, 02 May 2025 11:19:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2933,13 +2975,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY=\""
+          "Value": "W/\"jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY="
+          "Value": "sha256-jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA="
         }
       ]
     },
@@ -2954,7 +2996,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "744"
+          "Value": "845"
         },
         {
           "Name": "Content-Type",
@@ -2962,11 +3004,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY=\""
+          "Value": "\"jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 13:53:01 GMT"
+          "Value": "Fri, 02 May 2025 11:19:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2976,13 +3018,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-oSEQKuz+U+7wn9i8o21eyDS0DsAJ+txf4OTFYuWVtzY="
+          "Value": "sha256-jSxBSa9KACGriRdDWrpl6QGNEKvWllpvaz9+tEg8ijA="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-3bh7rsmxr4.gz",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\zx871nmwpl-bqk6p3czup.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2991,7 +3033,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "372"
+          "Value": "416"
         },
         {
           "Name": "Content-Type",
@@ -2999,11 +3041,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"gQ6AoQ2Z/ALAAHE27vFaQrl8YqPC1danOVRWOEciyLU=\""
+          "Value": "\"xf0cv+5usyXf8V/CFvXrCTJYyIT/xcbgzFNqngmiW4Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 11 Apr 2025 13:53:01 GMT"
+          "Value": "Fri, 02 May 2025 11:19:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3021,7 +3063,305 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-gQ6AoQ2Z/ALAAHE27vFaQrl8YqPC1danOVRWOEciyLU="
+          "Value": "sha256-xf0cv+5usyXf8V/CFvXrCTJYyIT/xcbgzFNqngmiW4Q="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.json",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-vc9hrb77nv.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006711409396"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EIsjTsVISCU4kPqdMn3VGIme3LNvKgWoaB2FWTgHD2Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 11:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.json",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\data\\users.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 11:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.json.gz",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-vc9hrb77nv.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EIsjTsVISCU4kPqdMn3VGIme3LNvKgWoaB2FWTgHD2Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 11:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-EIsjTsVISCU4kPqdMn3VGIme3LNvKgWoaB2FWTgHD2Q="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.vc9hrb77nv.json",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-vc9hrb77nv.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006711409396"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EIsjTsVISCU4kPqdMn3VGIme3LNvKgWoaB2FWTgHD2Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 11:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vc9hrb77nv"
+        },
+        {
+          "Name": "label",
+          "Value": "data/users.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.vc9hrb77nv.json",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\wwwroot\\data\\users.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 11:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vc9hrb77nv"
+        },
+        {
+          "Name": "label",
+          "Value": "data/users.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YX96QvDUcePOdV8dDfdgpdZG+tfibS1rBrNgFTax9iw="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.vc9hrb77nv.json.gz",
+      "AssetFile": "C:\\Users\\Fuad\\Desktop\\Yeni klasör\\Ceng382_25-26_202111042\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-vc9hrb77nv.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EIsjTsVISCU4kPqdMn3VGIme3LNvKgWoaB2FWTgHD2Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 11:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vc9hrb77nv"
+        },
+        {
+          "Name": "label",
+          "Value": "data/users.json.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-EIsjTsVISCU4kPqdMn3VGIme3LNvKgWoaB2FWTgHD2Q="
         }
       ]
     },

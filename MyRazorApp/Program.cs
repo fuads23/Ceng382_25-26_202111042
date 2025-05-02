@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -9,18 +10,26 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
+app.UseSession();
 
-app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+// ➕ Bu blok eklenmeli
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/" && context.Session.GetString("username") == null)
+    {
+        context.Response.Redirect("/Login");
+        return;
+    }
+    await next();
+});
 
+app.MapRazorPages();
 app.Run();
