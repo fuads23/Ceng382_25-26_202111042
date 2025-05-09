@@ -1,8 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using MyRazorApp.Data;
+using MyRazorApp.Helpers; 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
+
+builder.Services.AddDbContext<SchoolDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolDbConnection")));
 
 var app = builder.Build();
 
@@ -17,10 +24,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+DataSeeder.SeedInitialData(app.Configuration);
+
+
 app.UseAuthorization();
 app.UseSession();
 
-// ➕ Bu blok eklenmeli
+
 app.Use(async (context, next) =>
 {
     if (context.Request.Path == "/" && context.Session.GetString("username") == null)

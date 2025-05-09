@@ -40,6 +40,10 @@
                     <textarea asp-for="ClassInfo.Description" class="form-control"></textarea>
                     <span asp-validation-for="ClassInfo.Description" class="text-danger"></span>
                 </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="ClassInfo.IsActive" />
+                    <label class="form-check-label" asp-for="ClassInfo.IsActive">IsActive</label>
+                </div>
                 <button type="submit" asp-page-handler="Add" class="btn btn-primary">
                     @(Model.ClassInfo.Id > 0 ? "Update Class" : "Add Class")
                 </button>

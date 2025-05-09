@@ -1,57 +1,68 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MyRazorApp.Models;
-using System.Text.Json;
+using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MyRazorApp.Pages
 {
     public class LoginModel : PageModel
     {
-        [BindProperty] public string Username { get; set; } = string.Empty;
-        [BindProperty] public string Password { get; set; } = string.Empty;
-        public string ErrorMessage { get; set; } = string.Empty;
+        private readonly IConfiguration _config;
 
-        public IActionResult OnGet()
+        public LoginModel(IConfiguration config)
         {
-            if (HttpContext.Session.GetString("username") != null)
-            {
-                return RedirectToPage("/Index");
-            }
-            return Page();
+            _config = config;
         }
+
+        [BindProperty]
+        public string Username { get; set; }= string.Empty;
+
+        [BindProperty]
+        public string Password { get; set; }= string.Empty;
+
+        public string ErrorMessage { get; set; } = "";
 
         public IActionResult OnPost()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "users.json");
-            var usersJson = System.IO.File.ReadAllText(filePath);
-            var users = JsonSerializer.Deserialize<List<User>>(usersJson);
+            using var conn = new SqlConnection(_config.GetConnectionString("SchoolDbConnection"));
+            conn.Open();
 
-            var user = users?.FirstOrDefault(u => u.Username == Username && u.Password == Password && u.IsActive);
+            var cmd = new SqlCommand("SELECT * FROM Users WHERE Username = @Username AND Password = @Password", conn);
+            cmd.Parameters.AddWithValue("@Username", Username);
+            cmd.Parameters.AddWithValue("@Password", Password); // Şifre hashlenmiyorsa düz kontrol
 
-            if (user != null)
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
             {
-                var token = Guid.NewGuid().ToString();
-                HttpContext.Session.SetString("username", user.Username);
+                string token = Guid.NewGuid().ToString();
+                string sessionId = Guid.NewGuid().ToString();
+
+                HttpContext.Session.SetString("username", Username);
                 HttpContext.Session.SetString("token", token);
-                HttpContext.Session.SetString("session_id", HttpContext.Session.Id);
+                HttpContext.Session.SetString("session_id", sessionId);
 
-                var cookieOptions = new CookieOptions
-                {
-                    Expires = DateTime.Now.AddMinutes(30),
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.Strict
-                };
+                Response.Cookies.Append("username", Username);
+                Response.Cookies.Append("token", token);
+                Response.Cookies.Append("session_id", sessionId);
 
-                Response.Cookies.Append("username", user.Username, cookieOptions);
-                Response.Cookies.Append("token", token, cookieOptions);
-                Response.Cookies.Append("session_id", HttpContext.Session.Id, cookieOptions);
+                reader.Close();
+
+                // Token ve sessionId'yi DB'ye kaydet
+                var updateCmd = new SqlCommand("UPDATE Users SET Token = @Token, SessionId = @SessionId WHERE Username = @Username", conn);
+                updateCmd.Parameters.AddWithValue("@Token", token);
+                updateCmd.Parameters.AddWithValue("@SessionId", sessionId);
+                updateCmd.Parameters.AddWithValue("@Username", Username);
+                updateCmd.ExecuteNonQuery();
 
                 return RedirectToPage("/Index");
             }
-
-            ErrorMessage = "Username or password is incorrect.";
-            return Page();
+            else
+            {
+                ErrorMessage = "Invalid username or password.";
+                return Page();
+            }
         }
     }
 }
